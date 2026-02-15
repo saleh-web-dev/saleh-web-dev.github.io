@@ -1,51 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Saleh Barakat | Web Developer</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #0f172a;
-      font-family: Arial, sans-serif;
-      color: #e5e7eb;
-    }
-    .card {
-      background: #020617;
-      padding: 32px;
-      border-radius: 14px;
-      text-align: center;
-      width: 320px;
-    }
-    h1 {
-      margin-bottom: 8px;
-    }
-    p {
-      margin: 6px 0;
-      color: #94a3b8;
-    }
-    a {
-      display: inline-block;
-      margin: 10px 8px 0;
-      color: #38bdf8;
-      text-decoration: none;
-      font-weight: bold;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Saleh Barakat | IT Engineer</title>
+
+<meta name="description" content="Saleh Barakat - IT Engineer and Web Developer portfolio.">
+<meta name="keywords" content="IT Engineer, Web Developer, Portfolio, Saleh Barakat">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:#020617;
+    color:#E2E8F0;
+    overflow:hidden;
+}
+
+/* ===== Background Canvas ===== */
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:-1;
+}
+
+/* ===== Center Moon ===== */
+.center{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+}
+
+.moon{
+    width:260px;
+    height:260px;
+    border-radius:50%;
+    background:radial-gradient(circle,
+        rgba(139,92,246,0.9) 0%,
+        rgba(99,102,241,0.6) 40%,
+        rgba(2,6,23,0.2) 70%);
+    box-shadow:
+        0 0 80px rgba(139,92,246,0.6),
+        inset 0 0 60px rgba(34,211,238,0.4);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:auto;
+}
+
+.logo{
+    font-size:80px;
+    font-weight:700;
+    background:linear-gradient(135deg,#22D3EE,#FFFFFF);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.role{
+    margin-bottom:15px;
+    font-size:22px;
+    color:#A5B4FC;
+}
+
+/* ===== Neon Panels ===== */
+.panel{
+    position:absolute;
+    width:380px;
+    padding:28px;
+    background:rgba(15,23,42,0.6);
+    backdrop-filter:blur(18px);
+    border-radius:18px;
+    border:1px solid rgba(139,92,246,0.4);
+    box-shadow:
+        0 0 40px rgba(139,92,246,0.4),
+        inset 0 0 30px rgba(139,92,246,0.15);
+}
+
+.panel h2{
+    color:#C084FC;
+    margin-bottom:12px;
+}
+
+.panel p{
+    color:#94A3B8;
+    line-height:1.6;
+}
+
+a{
+    color:#22D3EE;
+    text-decoration:none;
+}
+a:hover{color:#C084FC}
+
+/* Positions */
+.tl{ top:4%; left:3%; }
+.tr{ top:4%; right:3%; }
+.bl{ bottom:4%; left:3%; }
+.br{ bottom:4%; right:3%; }
+
+/* Responsive */
+@media(max-width:900px){
+    .panel{ width:300px; }
+    .moon{ width:200px;height:200px; }
+    .logo{ font-size:60px; }
+}
+</style>
 </head>
 <body>
-  <div class="card">
-    <h1>Saleh Barakat</h1>
-    <p>Computer Engineering Student</p>
-    <p>Web Developer</p>
-    <p>HTML • CSS • JavaScript</p>
-    <a href="https://github.com/saleh-web-dev">GitHub</a>
-    <a href="https://linkedin.com/in/saleh-barakat-818526261">LinkedIn</a>
-  </div>
+
+<canvas id="bg"></canvas>
+
+<!-- Center -->
+<div class="center">
+    <div class="role">IT Engineer</div>
+    <div class="moon">
+        <div class="logo">SB</div>
+    </div>
+</div>
+
+<!-- Panels -->
+<div class="panel tl">
+    <h2>About</h2>
+    <p>
+    Information Technology student focused on modern web development,
+    performance optimization, and building real-world applications.
+    </p>
+</div>
+
+<div class="panel tr">
+    <h2>Skills</h2>
+    <p>
+    HTML • CSS • JavaScript • React<br>
+    Git • Responsive Design • UI/UX
+    </p>
+</div>
+
+<div class="panel bl">
+    <h2>Projects</h2>
+    <p>
+    3D Portfolio<br>
+    Task Manager<br>
+    Responsive Landing Page
+    </p>
+</div>
+
+<div class="panel br">
+    <h2>Contact</h2>
+    <p>
+        <a href="mailto:saleh2003brkat@gmail.com">
+        saleh2003brkat@gmail.com
+        </a>
+    </p>
+</div>
+
+<script>
+const canvas = document.getElementById("bg");
+const ctx = canvas.getContext("2d");
+
+function resize(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener("resize", resize);
+
+/* ===== Cyber City Background ===== */
+let buildings=[];
+for(let i=0;i<80;i++){
+    buildings.push({
+        x:Math.random()*canvas.width,
+        w:20+Math.random()*50,
+        h:80+Math.random()*300,
+        glow:Math.random()*2
+    });
+}
+
+/* Moving light traffic */
+let traffic=[];
+for(let i=0;i<20;i++){
+    traffic.push({
+        x:Math.random()*canvas.width,
+        y:canvas.height*0.7 + Math.random()*120,
+        speed:1+Math.random()*2
+    });
+}
+
+function drawCity(){
+    buildings.forEach(b=>{
+        let baseY = canvas.height;
+
+        ctx.fillStyle="#020617";
+        ctx.fillRect(b.x, baseY-b.h, b.w, b.h);
+
+        b.glow+=0.02;
+        let g = Math.sin(b.glow)*0.5+0.5;
+
+        ctx.shadowBlur = 15*g;
+        ctx.shadowColor = g>0.5 ? "#22D3EE" : "#8B5CF6";
+
+        for(let y=baseY-b.h+10; y<baseY-10; y+=18){
+            ctx.fillStyle = g>0.5 ? "#22D3EE" : "#8B5CF6";
+            ctx.fillRect(b.x+4,y,3,10);
+        }
+
+        ctx.shadowBlur=0;
+    });
+}
+
+function drawTraffic(){
+    traffic.forEach(t=>{
+        ctx.strokeStyle="rgba(34,211,238,0.9)";
+        ctx.lineWidth=2;
+        ctx.beginPath();
+        ctx.moveTo(t.x,t.y);
+        ctx.lineTo(t.x-40,t.y);
+        ctx.stroke();
+
+        t.x+=t.speed;
+        if(t.x>canvas.width+50) t.x=-50;
+    });
+}
+
+function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    drawCity();
+    drawTraffic();
+    requestAnimationFrame(animate);
+}
+animate();
+</script>
+
 </body>
 </html>
